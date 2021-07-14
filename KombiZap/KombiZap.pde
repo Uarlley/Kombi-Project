@@ -31,7 +31,7 @@ void setup(){
   line(819.6, 333, 820, 320);
   
   //botton arc 1
-  arc(486, 520, 665, 50,0 , PI);
+  arc(485, 520, 663, 50,0 , PI);
   //botton arc 2
   arc(485, 530, 695, 50, -0.3, PI+0.3);
   //botton arc 3
@@ -42,8 +42,44 @@ void setup(){
   //left botton line
   line(832, 530, 833, 560);
   
+  //middle left arc
+  arc(195, 446, 20, 265, PI-0.7, PI+QUARTER_PI+0.2);
+  //middle right arc
+  arc(785, 431, 15, 226, -1, QUARTER_PI+0.3);
+  
+  //middle horizontal lines
+  line(195, 297, 790, 300);
+  line(161, 293, 195, 297);
+  line(790, 300,820, 295);
+  //middle-top horizontal arc
+  arc(490, 176, 561, 10,0 , PI);
   
   
+  //left-botton window arc
+  fill(#050505,70);
+  arc(347, 285, 268, 20,0-0.05 , PI+0.05);
+  //left-top window arc
+  arc(362, 193, 230, 15, PI+0.1, TWO_PI-0.1);
+  //left-left window line
+  line(247, 192, 212, 285);
+  //left-right window line 
+  line(476, 192, 480, 284);
+  
+  //right-botton window arc
+  arc(631, 285, 267, 20,0-0.05 , PI+0.05);
+  //right-top window arc
+  arc(615, 193, 230, 15, PI+0.1, TWO_PI-0.1);
+  //right-left window line
+  line(500, 192, 497, 284);
+  //right-right window line
+  line(729, 192, 765, 285);
+  
+  fill(#CBF8FF);
+  //left-side window
+  quad(204,192, 171, 284, 187, 286, 219, 192);
+  
+  //right-side window
+  quad(758,192,791, 292, 810, 289, 775, 194);
   
   
 }

@@ -19,15 +19,13 @@ boolean retracting = true;
 
 void setup(){
     size(1000,650);
-    //frameRate(60);
+    frameRate(200);
 }
 
 void draw(){
-  background(#ADA7A7);
+  moon();
 
   strokeWeight(2);
-  kombi = loadImage("Kombi.jpeg");
-  //image(kombi,0,0,1000,650);
 
   //windowPainting
   noStroke();
@@ -36,7 +34,7 @@ void draw(){
   quad(209,178, 163, 295,820, 303, 773, 177);
   stroke(#000000);
   //top arc
-  fill(#14FF00,200);
+  fill(#14FF00,300);
   arc(490, 185, 570, 100, PI+0.1, TWO_PI-0.1);
   
   //left window arc
@@ -500,6 +498,20 @@ void logo(){
   triangle(440, 410, 455, 420, 430, 426);
 }
 
+void moon(){
+  background(#000000);
+  strokeWeight(1);
+  for(int i = 0; i < 10; i++){
+    stroke(#FCFFFC);
+    float posX = random(0,width);
+    float posY = random(0,height/2);
+    line(posX,posY+4,posX,posY-4);
+    line(posX-4,posY,posX+4,posY);
+  }
+  stroke(#000000);
+  fill(#A0A0A0);
+  ellipse(width/2,600,1500,700);
+}
 void keyPressed(){
   if((key == 'f' || key == 'F') && headlight==false) {
     System.out.println("acendeu o farol");

@@ -24,6 +24,14 @@ void draw(){
   strokeWeight(2);
   kombi = loadImage("Kombi.jpeg");
   //image(kombi,0,0,1000,650);
+  
+    
+    
+  //windowPainting
+  noStroke();
+  fill(#2EC900,300);
+  quad(209,178, 163, 295,820, 303, 773, 177);
+  stroke(#000000);
   //top arc
   fill(#14FF00,300);
   arc(490, 185, 570, 100, PI+0.1, TWO_PI-0.1);
@@ -34,8 +42,12 @@ void draw(){
   //right window arc
   line(773,180,815,290);
   noStroke();
+  
+
   //middle painting
   rect(159,300,660,220);
+  
+  
   stroke(#000000);
   //left arc
   arc(177, 438, 60, 260, PI-0.7, PI+QUARTER_PI+0.2);
@@ -75,7 +87,7 @@ void draw(){
   
   
   //left-botton window arc
-  fill(#050505,170);
+  fill(#363636);
   arc(347, 285, 268, 20,0-0.05 , PI+0.05);
   //left-top window arc
   arc(362, 193, 230, 15, PI+0.1, TWO_PI-0.1);
@@ -93,7 +105,7 @@ void draw(){
   //right-right window line
   line(729, 192, 765, 285);
   
-  fill(#00F7E5,80);
+  fill(#00F7E5,300);
   //left-side window
   quad(204,192, 171, 284, 187, 286, 219, 192);
   
@@ -227,10 +239,9 @@ void draw(){
   
   
   //left windows borders
-  fill(#050505,170);
+  fill(#363636,300);
   quad(248,192, 212, 284, 220, 286, 255, 192);
   quad(470,192, 475, 285, 482, 285, 477, 192);
-  fill(#050505,170);
   quad(204,192, 171, 284, 176, 286, 209, 192);
   
    //right windows borders
@@ -239,12 +250,14 @@ void draw(){
   quad(770,194,806, 292, 810, 289, 775, 194);
   
   //right window paint
-  fill(#00F7E5,90);
+  fill(#00F7E5,300);
   quad(507, 192,503, 285,757, 285, 722,192);
+  fill(#0AE4FF,300);
   quad(507, 192,503, 285,738, 235, 722,192);
   
   //left window paint
   quad(255, 192,220, 286,475, 285, 470,192);
+  fill(#00F7E5,300);
   quad(255, 192,220, 286,473, 235, 470,192);
   
   //middle vertical lines

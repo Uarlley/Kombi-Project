@@ -1,8 +1,21 @@
 
 PImage kombi;
+int x;
+int y = -90; 
+float newX, newY;
+float newX2, newY2;
+float oldX, oldY;
+float theta; 
+PGraphics pg;
+int tothe = 0;
 
 void setup(){
-  size(1000,650);
+    size(1000,650);
+}
+
+void draw(){
+  background(#ADA7A7);
+
   strokeWeight(2);
   kombi = loadImage("Kombi.jpeg");
   //image(kombi,0,0,1000,650);
@@ -341,16 +354,42 @@ void setup(){
   arc(240, 580, 5, 50, HALF_PI-1.58, PI+0.05);
 
  //right tire
- stroke(0);
- line(734, 628, 776, 628);
- arc(760, 575, 70, 120, -0.03, HALF_PI-0.5);
- fill(#000000, 90);
- arc(735, 582, 25, 90, HALF_PI-1.7, PI+0.05);
- fill(#000000, 120);
- arc(755, 575, 70, 120, +0.09, HALF_PI-0.7);
- arc(745, 575, 70, 120, +0.09, HALF_PI-0.7);
- arc(735, 575, 70, 120, +0.09, HALF_PI-0.7);
- arc(725, 577, 70, 120, +0.09, HALF_PI-0.7);
- fill(#000000, 120);
- arc(735, 580, 5, 50, HALF_PI-1.58, PI+0.05);
+  stroke(0);
+  line(734, 628, 776, 628);
+  arc(760, 575, 70, 120, -0.03, HALF_PI-0.5);
+  fill(#000000, 90);
+  arc(735, 582, 25, 90, HALF_PI-1.7, PI+0.05);
+  fill(#000000, 120);
+  arc(755, 575, 70, 120, +0.09, HALF_PI-0.7);
+  arc(745, 575, 70, 120, +0.09, HALF_PI-0.7);
+  arc(735, 575, 70, 120, +0.09, HALF_PI-0.7);
+  arc(725, 577, 70, 120, +0.09, HALF_PI-0.7);
+  fill(#000000, 120);
+  arc(735, 580, 5, 50, HALF_PI-1.58, PI+0.05);
+  
+  //----------------------------------------------------------//
+  
+  strokeWeight(3);
+  translate(340, 286);
+ 
+  newX = x*cos(theta)- y*sin(theta);
+  newY = x*sin(theta)+ y*cos(theta);
+ 
+  if(theta < PI/2 && tothe == 0) {
+    theta = theta + PI/50;
+    if(theta > PI/2) tothe = 1;
+  }
+  if (tothe == 1) {
+    theta = theta - PI/50;
+    if(theta < -PI/2) tothe = 0;
+  }
+  System.out.println(theta);
+ 
+  //left wiper
+  line(0, 0, newX, newY);
+  
+  //right wiper
+  translate(300, 0);
+  line(0, 0, newX, newY);
+  
 }

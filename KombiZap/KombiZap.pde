@@ -16,10 +16,15 @@ float yEarViewRetract = 0;
 float xEarViewRetract = 0;
 boolean earView = false;
 boolean retracting = true;
-
+float[] posX = new float[20];
+float[] posY = new float[20];
 void setup(){
     size(1000,650);
-    frameRate(200);
+    frameRate(60);
+    for(int i = 0; i < 20; i++){
+      posX[i] = random(0,width);
+      posY[i] = random(0,height/2);
+    }
 }
 
 void draw(){
@@ -47,10 +52,12 @@ void draw(){
 
   //middle painting
   rect(159,300,660,220);
+  rect(155,500,5,20);
   fill(#14FF00,200);
   //line(823, 298, 823, 317);
   quad(160,295, 155,300,823, 317,823, 296);
   fill(#14FF00,200);
+  
   
   stroke(#000000);
   //left arc
@@ -183,6 +190,7 @@ void draw(){
       if(theta < -PI/2 + 0.8) tothe = 0;
     }
   }
+  fill(#000000);
 }
 
 //earviewers
@@ -297,18 +305,18 @@ void bumper(){
   //left  vertical line
   line(832, 530, 833, 560);
   
+  
   //license plate
   strokeWeight(2);
-  fill(#828382,200);
+  fill(#BDBFBD,200);
   rect(365,555, 235,29,1);
   
-  textSize(26);
+  textSize(20);
   fill(#000000);
   text("O JOGO", 450, 578, 60);
   fill(#08C106,300);
 }
 
-//setas
 void headLights(){
 
    stroke(#000000);
@@ -322,7 +330,8 @@ void headLights(){
   if(headlight==true) fill(#FAA158,190);
   else fill(#9D9A9A,300);
   ellipse(256,447, 25,20);
-  stroke(#000000);
+  stroke(#525252);
+  strokeWeight(5);
   ellipse(256,447, 100,63);
   fill(#FFFFFF,100);
   stroke(#FFFFFF,80);
@@ -340,7 +349,8 @@ void headLights(){
   if(headlight==true) fill(#FAA158,190);
   else fill(#9D9A9A,300);
   ellipse(715,447, 25,20);
-  stroke(#000000);
+  stroke(#525252);
+  strokeWeight(5);
   ellipse(715,447, 100,63);
   fill(#FFFFFF,100);
   stroke(#FFFFFF,50);
@@ -354,7 +364,8 @@ void litteHeadlights(){
   translate(width/4, height/4);
   rotate(-0.08);
   translate(-width/4, -height/4);
-  stroke(#000000);
+  stroke(#525252);
+  strokeWeight(4);
   fill(#A7A6A6,300);
   ellipse(710,560, 47,19);
   if(rArrow == true && ArrowDelay<=10) fill(#FAA158,100);
@@ -376,7 +387,8 @@ void litteHeadlights(){
   translate(width/4, height/4);
   rotate(0.16);
   translate(-width/4, -height/4);
-  stroke(#000000);
+  stroke(#525252);
+  strokeWeight(4);
   fill(#A7A6A6,300);
   ellipse(263,523, 47,19);
   if(lArrow == true && ArrowDelay<=10) fill(#FAA158,100);
@@ -500,17 +512,52 @@ void logo(){
 
 void moon(){
   background(#000000);
-  strokeWeight(1);
-  for(int i = 0; i < 10; i++){
+  strokeWeight(2);
+  for(int i = 0; i < 20; i++){
     stroke(#FCFFFC);
-    float posX = random(0,width);
-    float posY = random(0,height/2);
-    line(posX,posY+4,posX,posY-4);
-    line(posX-4,posY,posX+4,posY);
+    line(posX[i],posY[i]+4,posX[i],posY[i]-4);
+    line(posX[i]-4,posY[i],posX[i]+4,posY[i]);
   }
+  
   stroke(#000000);
   fill(#A0A0A0);
-  ellipse(width/2,600,1500,700);
+  ellipse(width/2,600,2500,700);
+  
+  //holes
+  fill(#797C79);
+  rotate(-0.05);
+  ellipse(100,400,200,80);
+  ellipse(50,570,200,80);
+  noStroke();
+  fill(#484848);
+  ellipse(110,417,185,44);
+  ellipse(50,581,180,55);
+  stroke(#000000);
+  fill(#797C79);
+  rotate(-0.05);
+  ellipse(-10,320,100,40);
+  noStroke();
+  fill(#484848);
+  ellipse(-14,329,90,20);
+  
+  rotate(0.15);
+  stroke(0);
+  fill(#797C79);
+  ellipse(890,280,200,80);
+  ellipse(950,570,200,80);
+  noStroke();
+  fill(#484848);
+  ellipse(890,296,160,47);
+  ellipse(950,581,180,55);
+  stroke(#000000);
+  fill(#797C79);
+  rotate(0.05);
+  ellipse(1010,320,100,40);
+  noStroke();
+  fill(#484848);
+  ellipse(1014,329,90,20);
+  rotate(-0.1);
+ 
 }
 void keyPressed(){
   if((key == 'f' || key == 'F') && headlight==false) {
@@ -543,7 +590,7 @@ void keyPressed(){
     System.out.println("cancelou a seta pra esquerda");
   }
   
-  
+  //arrows
   if( keyCode == RIGHT && rArrow == false){
     lArrow = false;
     rArrow = true;

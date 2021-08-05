@@ -195,6 +195,7 @@ void draw(){
 
 //earviewers
 void earViewers(){
+  strokeWeight(2);
   //left rear view
   fill(#266C03,120);
   if(earView == true){

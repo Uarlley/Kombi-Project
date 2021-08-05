@@ -1,5 +1,7 @@
+import processing.sound.*;
+SoundFile motor;
+SoundFile buzina;
 
-PImage kombi;
 int x = -50;
 int y = -75; 
 float newX = x, newY = y;
@@ -16,6 +18,7 @@ float yEarViewRetract = 0;
 float xEarViewRetract = 0;
 boolean earView = false;
 boolean retracting = true;
+boolean lMotor = false;
 float[] posX = new float[20];
 float[] posY = new float[20];
 void setup(){
@@ -25,6 +28,8 @@ void setup(){
       posX[i] = random(0,width);
       posY[i] = random(0,height/2);
     }
+    motor = new SoundFile(this, "Ligando.mp3");
+    buzina = new SoundFile(this, "audioZap.mp3");
 }
 
 void draw(){
@@ -613,5 +618,20 @@ void keyPressed(){
   else if((key == 'r' || key == 'R') && earView == true){
     earView = false;
     System.out.println("parou de retrair");
+  }
+  
+  //Motor
+  if((key == 'm' || key == 'M') && lMotor == false){
+    motor.play();
+    lMotor = true;
+  }
+  else if((key == 'm' || key == 'M') && lMotor == true){
+    motor.stop();
+    lMotor = false;
+  }
+  
+  //Horn
+  if((key == 'b' || key == 'B')){
+    buzina.play();
   }
 }

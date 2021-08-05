@@ -200,8 +200,8 @@ void earViewers(){
       xEarViewRetract-=1;
       yEarViewRetract -= 0.09;
     }
-    if((xEarViewRetract == 40 && retracting == true) || (xEarViewRetract == 0 && retracting == false) ){
-      retracting = !retracting
+    if((xEarViewRetract >= 40 && retracting == true) || (xEarViewRetract <= 0 && retracting == false) ){
+      retracting = !retracting;
       earView = false;
     };
   }
@@ -224,26 +224,27 @@ void earViewers(){
   line(170+xEarViewRetract, 160+yEarViewRetract, 275, 168);
   rotate(-0.3);
   
-  
   //right rear view
   strokeWeight(2);
   fill(#266C03,120);
   quad(764, 245, 772,265,779, 266, 771, 245);
   quad(760, 248, 764,260, 768, 261, 763, 247);
+  
  
   fill(#50524E);
-  ellipse(822,204,48,30);
+  ellipse(822-xEarViewRetract,204+xEarViewRetract/1.6,48,30);
   fill(#757674);
   noStroke();
-  ellipse(822,204,34,20);
+  ellipse(822-xEarViewRetract,204+xEarViewRetract/1.6,34,20);
   stroke(#000000);
   
   strokeWeight(5);
   stroke(#000000);
-  line(826, 206, 822,204);
+  line(826-xEarViewRetract, 206+xEarViewRetract/1.6, 822-xEarViewRetract,204+xEarViewRetract/1.6);
   stroke(#071500);
   strokeWeight(3);
-  line(763, 247, 846, 195);
+  line(763, 247, 846-xEarViewRetract, 195+xEarViewRetract/1.6);
+  
 }
 
 //tires

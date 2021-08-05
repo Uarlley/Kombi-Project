@@ -12,10 +12,14 @@ boolean headlight = false;
 boolean lArrow = false;
 boolean rArrow = false;
 int ArrowDelay = 0;
+float yEarViewRetract = 0;
+float xEarViewRetract = 0;
+boolean earView = false;
+boolean retracting = true;
 
 void setup(){
     size(1000,650);
-    frameRate(60);
+    //frameRate(60);
 }
 
 void draw(){
@@ -28,6 +32,7 @@ void draw(){
   //windowPainting
   noStroke();
   fill(#2EC900,300);
+  
   quad(209,178, 163, 295,820, 303, 773, 177);
   stroke(#000000);
   //top arc
@@ -44,8 +49,9 @@ void draw(){
 
   //middle painting
   rect(159,300,660,220);
-  fill(#242222,200);
-  quad(159,300, 130,350, 800,300,130,350);
+  fill(#14FF00,200);
+  //line(823, 298, 823, 317);
+  quad(160,295, 155,300,823, 317,823, 296);
   fill(#14FF00,200);
   
   stroke(#000000);
@@ -66,12 +72,6 @@ void draw(){
   line(819.6, 333, 820, 320);
   
   bumper();
-  
-  
-  //right botton line
-  line(138, 530, 137, 560);
-  //left botton line
-  line(832, 530, 833, 560);
   
   //middle left arc
   arc(195, 446, 20, 265, PI-0.7, PI+QUARTER_PI+0.2);
@@ -126,7 +126,6 @@ void draw(){
   
   logo();
   headLights();
-  
   litteHeadlights();
   
   
@@ -158,25 +157,73 @@ void draw(){
   line(489, 181,489, 297);
   line(740, 179,782, 299);
   
+  earViewers();
+  tires();
+  
+  //wipers
+  strokeWeight(3);
+  //left wiper
+  translate(340, 286);
+  line(0, 0, newX, newY);
+  fill(#000000);
+  ellipse(0,0,7,7);
+  //right wiper
+  translate(280, 0);
+  ellipse(0,0,7,7);
+  line(0, 0, newX, newY);
+    
+  
+  if(wiping == true){
+    newX = x*cos(theta)- y*sin(theta);
+    newY = x*sin(theta)+ y*cos(theta);
+    if(theta < PI/2 + 0.55 && tothe == 0) {
+      theta = theta + PI/15;
+      if(theta > PI/2 + 0.55) tothe = 1;
+    }
+    if (tothe == 1) {
+      theta = theta - PI/15;
+      if(theta < -PI/2 + 0.8) tothe = 0;
+    }
+  }
+}
+
+//earviewers
+void earViewers(){
   //left rear view
   fill(#266C03,120);
+  if(earView == true){
+    if(retracting == true){
+      xEarViewRetract+=1;
+      yEarViewRetract += 0.09;
+    }
+    else{
+      xEarViewRetract-=1;
+      yEarViewRetract -= 0.09;
+    }
+    if((xEarViewRetract == 40 && retracting == true) || (xEarViewRetract == 0 && retracting == false) ){
+      retracting = !retracting
+      earView = false;
+    };
+  }
   quad(205, 240, 196,265, 205, 266, 213, 241);
   quad(214, 243, 209,260, 214, 261, 219, 244);
   rotate(0.3);
   fill(#50524E);
-  ellipse(203,153,45,38);
+  ellipse(203+xEarViewRetract ,153 + yEarViewRetract,45,38);
   fill(#757674);
   noStroke();
-  ellipse(203,153,30,25);
+  ellipse(203 + xEarViewRetract,153 + yEarViewRetract,30,25);
   stroke(#000000);
-  rotate(-0.3);
+  
   
   strokeWeight(5);
   stroke(#000000);
-  line(136, 208, 146, 205);;
+  line(203 +xEarViewRetract, 153 +yEarViewRetract, 195 +xEarViewRetract, 160+yEarViewRetract);;
   stroke(#071500);
   strokeWeight(3);
-  line(125, 204, 214, 243);
+  line(170+xEarViewRetract, 160+yEarViewRetract, 275, 168);
+  rotate(-0.3);
+  
   
   //right rear view
   strokeWeight(2);
@@ -197,17 +244,10 @@ void draw(){
   stroke(#071500);
   strokeWeight(3);
   line(763, 247, 846, 195);
-  
-  //license plate
-  strokeWeight(2);
-  fill(#828382,200);
-  rect(365,555, 235,29,1);
-  
-  textSize(26);
-  fill(#000000);
-  text("O JOGO", 450, 578, 60);
-  
-  
+}
+
+//tires
+void tires(){
   //left tire
   fill(#000000, 120);
   stroke(0);
@@ -236,36 +276,6 @@ void draw(){
   arc(725, 577, 70, 120, +0.09, HALF_PI-0.7);
   fill(#000000, 120);
   arc(735, 580, 5, 50, HALF_PI-1.58, PI+0.05);
-  
-  //left headlight and right headlight
-
-   
-   
-  //wipers
-  strokeWeight(3);
-  //left wiper
-  translate(340, 286);
-  line(0, 0, newX, newY);
-  fill(#000000);
-  ellipse(0,0,7,7);
-  //right wiper
-  translate(280, 0);
-  ellipse(0,0,7,7);
-  line(0, 0, newX, newY);
-    
-  
-  if(wiping == true){
-    newX = x*cos(theta)- y*sin(theta);
-    newY = x*sin(theta)+ y*cos(theta);
-    if(theta < PI/2 + 0.55 && tothe == 0) {
-      theta = theta + PI/15;
-      if(theta > PI/2 + 0.55) tothe = 1;
-    }
-    if (tothe == 1) {
-      theta = theta - PI/15;
-      if(theta < -PI/2 + 0.8) tothe = 0;
-    }
-  }
 }
 
 //parachoque
@@ -282,6 +292,21 @@ void bumper(){
   //botton arc 3
   fill(#14FF00,300);
   arc(485, 520, 663, 50,0 , PI);
+  
+  //right vertical line
+  line(138, 530, 137, 560);
+  //left  vertical line
+  line(832, 530, 833, 560);
+  
+  //license plate
+  strokeWeight(2);
+  fill(#828382,200);
+  rect(365,555, 235,29,1);
+  
+  textSize(26);
+  fill(#000000);
+  text("O JOGO", 450, 578, 60);
+  fill(#08C106,300);
 }
 
 //setas
@@ -516,5 +541,16 @@ void keyPressed(){
     rArrow = false;
     ArrowDelay = 0;
     System.out.println("cancelou a seta pra direita");
+  }
+  
+  
+  //earviewers
+  if( (key == 'r' || key == 'R') && earView == false){
+    earView = true;
+    System.out.println("retraiu o retrovisor");
+  }
+  else if((key == 'r' || key == 'R') && earView == true){
+    earView = false;
+    System.out.println("parou de retrair");
   }
 }

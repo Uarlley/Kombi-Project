@@ -24,9 +24,7 @@ void draw(){
   strokeWeight(2);
   kombi = loadImage("Kombi.jpeg");
   //image(kombi,0,0,1000,650);
-  
-    
-    
+
   //windowPainting
   noStroke();
   fill(#2EC900,300);

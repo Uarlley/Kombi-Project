@@ -33,7 +33,7 @@ void draw(){
   quad(209,178, 163, 295,820, 303, 773, 177);
   stroke(#000000);
   //top arc
-  fill(#14FF00,300);
+  fill(#14FF00,200);
   arc(490, 185, 570, 100, PI+0.1, TWO_PI-0.1);
   
   //left window arc
@@ -46,7 +46,9 @@ void draw(){
 
   //middle painting
   rect(159,300,660,220);
-  
+  fill(#242222,200);
+  quad(159,300, 130,350, 800,300,130,350);
+  fill(#14FF00,200);
   
   stroke(#000000);
   //left arc
@@ -124,115 +126,7 @@ void draw(){
   arc(190, 313, 20, 46, PI-1, PI+QUARTER_PI);
   arc(792, 315, 20, 46, PI+HALF_PI+QUARTER_PI, TWO_PI+0.8);
   
-  
-  //logo
-  stroke(0);
-  fill(#FFFFFF);
-  arc(487, 390, 140, 100, PI-0.50, TWO_PI+2.1);
-  line(425, 412, 412, 440);
-  line(452, 432, 412, 440);
-  
-  //inside the logo
-  strokeWeight(1);
-  stroke(#45FC4C);
-  fill(#45FC4C);
-  arc(487, 390, 110, 77, PI-1, TWO_PI+4);
-  
-  
-  
-  //phone
-  strokeWeight(3);
-  stroke(#FFFFFF);
-  fill(#FFFFFF, 0);
-  arc(508, 375, 110, 77, HALF_PI, PI);
-  fill(#FFFFFF);
-  arc(464, 375, 20, 14, PI+QUARTER_PI-0.8, TWO_PI-1); 
-  arc(496, 405, 48, 20, PI+2.6, TWO_PI+1);
-  fill(#FFFFFF, 0);
-  arc(518, 387, 95, 38, HALF_PI+0.55, PI);
-  line(470, 369, 475, 382);
-  line(502, 394, 515, 398);
-  line(475, 382, 470, 388);
-  line(502, 394, 494, 402);
-  
-  //phone color inside the logo
-  strokeWeight(1);
-  fill(#FFFFFF);
-  circle(505, 405, 15);
-  circle(510, 405, 13);
-  circle(515, 405, 8.5);
-  circle(503, 399, 7);
-  circle(509, 400, 7); 
-  circle(514, 402, 7);
-  circle(505, 400, 7);
-  circle(503, 398, 4);
-  circle(498, 406, 8.5);
-  circle(500, 404, 8.5);
-  circle(498, 408, 8.5);
-  circle(493, 408, 7.4);
-  circle(489, 407, 7.4);
-  circle(489, 407, 7.4);
-  circle(487, 406, 7.4);
-  circle(486, 405, 7.2);
-  circle(484, 406, 7);
-  circle(484, 406, 7);
-  circle(500, 410, 7);
-  circle(458, 377, 7);
-  circle(462, 377, 7);
-  circle(467, 372, 7);
-  circle(469, 376, 7);
-  circle(469, 378, 7);
-  circle(469, 380, 7);
-  circle(471, 380, 7);
-  circle(464, 380, 7);
-  circle(458, 380, 7);
-  circle(458, 383, 7);
-  circle(462, 383, 7);
-  circle(465, 383, 7);
-  circle(471, 382, 7);
-  circle(465, 385, 7);
-  circle(468, 385, 6);
-  circle(465, 387, 6);
-  circle(462, 387, 6);
-  circle(460, 387, 6);
-  circle(461, 389, 6);
-  circle(462, 389, 6);
-  circle(465, 390, 6);
-  circle(462, 390, 6);
-  circle(464, 393, 6);
-  circle(466, 393, 6);
-  circle(469, 392, 6);
-  circle(469, 396, 6);
-  circle(467, 396, 6);
-  circle(471, 399, 6);
-  circle(474, 398, 6);
-  circle(474, 401, 6);
-  circle(479, 402, 7);
-  circle(481, 403, 8);
-  circle(478, 404, 7);
-  circle(438, 422, 19);
-  circle(434, 414, 12);
-  circle(450, 425, 9);
-  circle(453, 425, 8);
-  circle(449, 427, 9);
-  circle(430, 417, 9);
-  circle(430, 420, 9);
-  circle(429, 427, 15);
-   circle(423, 433, 7);
-   circle(418, 435, 3);
-   circle(427, 422, 7); 
-   circle(444, 428, 7);
-   circle(438, 430, 7); 
-   circle(447, 420, 7);
-   circle(452, 429, 7);
-   strokeWeight(2);
-   stroke(255,255,255);
-   line(427, 412, 417, 435);
-   line(450, 430, 416, 435);
-   stroke(#45FC4C);
-   fill(#45FC4C);
-   triangle(440, 410, 455, 420, 430, 426);
-   
+  logo();
   headLights();
   
   litteHeadlights();
@@ -482,6 +376,105 @@ void litteHeadlights(){
   ArrowDelay++;
 }
 
+void logo(){
+  //logo
+  stroke(0);
+  fill(#FFFFFF,0);
+  noStroke();
+  fill(#FFFFFF);
+  ellipse(487, 390, 140, 100);
+  triangle(412, 440,425, 412,452, 432);
+  stroke(#000000);
+  line(425, 412, 412, 440);
+  line(452, 432, 412, 440);
+  arc(487, 390, 140, 100, PI-0.50, TWO_PI+2.1);
+  
+  //inside the logo
+  strokeWeight(1);
+  stroke(#45FC4C);
+  fill(#45FC4C);
+  //arc(487, 390, 110, 77, PI-1, TWO_PI+4);
+  ellipse(487, 390,110,77);
+  
+  
+  
+  //phone
+  strokeWeight(3);
+  stroke(#FFFFFF);
+  fill(#FFFFFF, 0);
+  arc(508, 375, 110, 77, HALF_PI, PI);
+  fill(#FFFFFF);
+  arc(464, 375, 20, 14, PI+QUARTER_PI-0.8, TWO_PI-1); 
+  arc(496, 405, 48, 20, PI+2.6, TWO_PI+1);
+  fill(#FFFFFF, 0);
+  arc(518, 387, 95, 38, HALF_PI+0.55, PI);
+  line(470, 369, 475, 382);
+  line(502, 394, 515, 398);
+  line(475, 382, 470, 388);
+  line(502, 394, 494, 402);
+  
+  //phone color inside the logo
+  strokeWeight(1);
+  fill(#FFFFFF);
+  circle(505, 405, 15);
+  circle(510, 405, 13);
+  circle(515, 405, 8.5);
+  circle(503, 399, 7);
+  circle(509, 400, 7); 
+  circle(514, 402, 7);
+  circle(505, 400, 7);
+  circle(503, 398, 4);
+  circle(498, 406, 8.5);
+  circle(500, 404, 8.5);
+  circle(498, 408, 8.5);
+  circle(493, 408, 7.4);
+  circle(489, 407, 7.4);
+  circle(489, 407, 7.4);
+  circle(487, 406, 7.4);
+  circle(486, 405, 7.2);
+  circle(484, 406, 7);
+  circle(484, 406, 7);
+  circle(500, 410, 7);
+  circle(458, 377, 7);
+  circle(462, 377, 7);
+  circle(467, 372, 7);
+  circle(469, 376, 7);
+  circle(469, 378, 7);
+  circle(469, 380, 7);
+  circle(471, 380, 7);
+  circle(464, 380, 7);
+  circle(458, 380, 7);
+  circle(458, 383, 7);
+  circle(462, 383, 7);
+  circle(465, 383, 7);
+  circle(471, 382, 7);
+  circle(465, 385, 7);
+  circle(468, 385, 6);
+  circle(465, 387, 6);
+  circle(462, 387, 6);
+  circle(460, 387, 6);
+  circle(461, 389, 6);
+  circle(462, 389, 6);
+  circle(465, 390, 6);
+  circle(462, 390, 6);
+  circle(464, 393, 6);
+  circle(466, 393, 6);
+  circle(469, 392, 6);
+  circle(469, 396, 6);
+  circle(467, 396, 6);
+  circle(471, 399, 6);
+  circle(474, 398, 6);
+  circle(474, 401, 6);
+  circle(479, 402, 7);
+
+  strokeWeight(2);
+  stroke(255,255,255);
+  line(427, 412, 417, 435);
+  line(450, 430, 416, 435);
+  stroke(#45FC4C);
+  fill(#45FC4C);
+  triangle(440, 410, 455, 420, 430, 426);
+}
 
 void keyPressed(){
   if((key == 'f' || key == 'F') && headlight==false) {

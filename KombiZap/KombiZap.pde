@@ -1,16 +1,21 @@
 
 PImage kombi;
-int x;
-int y = -90; 
-float newX, newY;
-float newX2, newY2;
-float oldX, oldY;
+int x = -50;
+int y = -75; 
+float newX = x, newY = y;
 float theta; 
 PGraphics pg;
 int tothe = 0;
+boolean wiping = false;
+int delay = 0;
+boolean headlight = false;
+boolean lArrow = false;
+boolean rArrow = false;
+int ArrowDelay = 0;
 
 void setup(){
     size(1000,650);
+    frameRate(60);
 }
 
 void draw(){
@@ -20,7 +25,7 @@ void draw(){
   kombi = loadImage("Kombi.jpeg");
   //image(kombi,0,0,1000,650);
   //top arc
-  fill(#14FF00,60);
+  fill(#14FF00,300);
   arc(490, 185, 570, 100, PI+0.1, TWO_PI-0.1);
   
   //left window arc
@@ -28,7 +33,10 @@ void draw(){
   
   //right window arc
   line(773,180,815,290);
-  
+  noStroke();
+  //middle painting
+  rect(159,300,660,220);
+  stroke(#000000);
   //left arc
   arc(177, 438, 60, 260, PI-0.7, PI+QUARTER_PI+0.2);
   line(164, 290, 157, 298);
@@ -36,6 +44,8 @@ void draw(){
   line(157, 316, 160, 320);
   line(160, 320, 160, 333);
   
+
+  stroke(#000000,200);
   //right arc
   arc(803, 426, 60, 217, -1, QUARTER_PI+0.3);
   line(823, 298, 815, 290);
@@ -43,12 +53,8 @@ void draw(){
   line(823, 316, 820, 320);
   line(819.6, 333, 820, 320);
   
-  //botton arc 1
-  arc(485, 520, 663, 50,0 , PI);
-  //botton arc 2
-  arc(485, 530, 695, 50, -0.3, PI+0.3);
-  //botton arc 3
-  arc(485, 560, 695, 50,0 , PI);
+  bumper();
+  
   
   //right botton line
   line(138, 530, 137, 560);
@@ -215,50 +221,9 @@ void draw(){
    fill(#45FC4C);
    triangle(440, 410, 455, 420, 430, 426);
    
-   stroke(#000000);
-  //left headlight
-  fill(#FAA158,120);
-  ellipse(256,447, 100,63);
-  fill(#FFFFFF,150);
-  stroke(#FFFFFF,0);
-  ellipse(256,447, 80,63);
-  ellipse(256,447, 60,43);
+  headLights();
   
-  //right headlight
-  stroke(#000000);
-  fill(#FAA158,120);
-  ellipse(715,447, 100,63);
-  fill(#FFFFFF,150);
-  stroke(#FFFFFF,0);
-  ellipse(715,447, 80,63);
-  ellipse(715,447, 60,43);
-  
-  
-  //right little headlight
-  translate(width/4, height/4);
-  rotate(-0.08);
-  translate(-width/4, -height/4);
-  stroke(#000000);
-  fill(#FFFFFF,200);
-  ellipse(710,560, 47,19);
-  stroke(#000000,0);
-  fill(#FAA158,200);
-  ellipse(710,560, 37,14);
-  
-  
-  //left little headlight
-  translate(width/4, height/4);
-  rotate(0.16);
-  translate(-width/4, -height/4);
-  stroke(#000000);
-  fill(#FFFFFF,200);
-  ellipse(263,523, 47,19);
-  stroke(#000000,0);
-  fill(#FAA158,200);
-  ellipse(263,523, 37,14);
-  translate(width/4, height/4);
-  rotate(-0.08);
-  translate(-width/4, -height/4);
+  litteHeadlights();
   
   
   //left windows borders
@@ -335,7 +300,7 @@ void draw(){
   
   textSize(26);
   fill(#000000);
-  text("text", 450, 578, 60);
+  text("O JOGO", 450, 578, 60);
   
   
   //left tire
@@ -367,29 +332,185 @@ void draw(){
   fill(#000000, 120);
   arc(735, 580, 5, 50, HALF_PI-1.58, PI+0.05);
   
-  //----------------------------------------------------------//
-  
+  //left headlight and right headlight
+
+   
+   
+  //wipers
   strokeWeight(3);
-  translate(340, 286);
- 
-  newX = x*cos(theta)- y*sin(theta);
-  newY = x*sin(theta)+ y*cos(theta);
- 
-  if(theta < PI/2 && tothe == 0) {
-    theta = theta + PI/50;
-    if(theta > PI/2) tothe = 1;
-  }
-  if (tothe == 1) {
-    theta = theta - PI/50;
-    if(theta < -PI/2) tothe = 0;
-  }
-  System.out.println(theta);
- 
   //left wiper
+  translate(340, 286);
   line(0, 0, newX, newY);
-  
+  fill(#000000);
+  ellipse(0,0,7,7);
   //right wiper
-  translate(300, 0);
+  translate(280, 0);
+  ellipse(0,0,7,7);
   line(0, 0, newX, newY);
+    
   
+  if(wiping == true){
+    newX = x*cos(theta)- y*sin(theta);
+    newY = x*sin(theta)+ y*cos(theta);
+    if(theta < PI/2 + 0.55 && tothe == 0) {
+      theta = theta + PI/15;
+      if(theta > PI/2 + 0.55) tothe = 1;
+    }
+    if (tothe == 1) {
+      theta = theta - PI/15;
+      if(theta < -PI/2 + 0.8) tothe = 0;
+    }
+  }
+}
+
+//parachoque
+void bumper(){
+  //botton arc 1
+  fill(#868383,300);
+  arc(485, 560, 695, 50,0 , PI);
+  //bumber painting
+  noStroke();
+  rect(138,530,695,30);
+  stroke(#000000);
+    //botton arc 2
+  arc(485, 530, 695, 50, -0.3, PI+0.3);
+  //botton arc 3
+  fill(#14FF00,300);
+  arc(485, 520, 663, 50,0 , PI);
+}
+
+//setas
+void headLights(){
+
+   stroke(#000000);
+  //left headlight
+  if(headlight==true) fill(#FAA158,25);
+  else fill(#FAA158,0);
+  noStroke();
+  ellipse(256,447, 150,100);
+  ellipse(256,447, 300,200);
+  ellipse(256,447, 500,400);
+  if(headlight==true) fill(#FAA158,190);
+  else fill(#9D9A9A,300);
+  ellipse(256,447, 25,20);
+  stroke(#000000);
+  ellipse(256,447, 100,63);
+  fill(#FFFFFF,100);
+  stroke(#FFFFFF,80);
+  ellipse(256,447, 80,63);
+  ellipse(256,447, 60,43);
+  stroke(#000000, 180);
+
+  //right headlight
+  if(headlight==true) fill(#FAA158,25);
+  else fill(#FAA158,0);
+  noStroke();
+  ellipse(715,447, 150,100);
+  ellipse(715,447, 300,200);
+  ellipse(715,447, 500,400);
+  if(headlight==true) fill(#FAA158,190);
+  else fill(#9D9A9A,300);
+  ellipse(715,447, 25,20);
+  stroke(#000000);
+  ellipse(715,447, 100,63);
+  fill(#FFFFFF,100);
+  stroke(#FFFFFF,50);
+  ellipse(715,447, 80,63);
+  ellipse(715,447, 60,43);
+  
+}
+
+void litteHeadlights(){
+  //right little headlight
+  translate(width/4, height/4);
+  rotate(-0.08);
+  translate(-width/4, -height/4);
+  stroke(#000000);
+  fill(#A7A6A6,300);
+  ellipse(710,560, 47,19);
+  if(rArrow == true && ArrowDelay<=10) fill(#FAA158,100);
+  else fill(#FFFFFF,100);
+  
+  stroke(#000000,0);
+  ellipse(710,560, 30,15);
+  ellipse(710,560, 24,12);
+  ellipse(710,560, 13,10);
+  ellipse(710,560, 47,19);
+  if(rArrow == true && ArrowDelay<=10) fill(#FAA158,25);
+  else fill(#FAA158,0);
+  ellipse(710,560, 120,50);
+  ellipse(710,560, 240,150);
+
+  
+  
+  //left little headlight
+  translate(width/4, height/4);
+  rotate(0.16);
+  translate(-width/4, -height/4);
+  stroke(#000000);
+  fill(#A7A6A6,300);
+  ellipse(263,523, 47,19);
+  if(lArrow == true && ArrowDelay<=10) fill(#FAA158,100);
+  else fill(#FFFFFF,100);
+  stroke(#000000,0);
+  ellipse(263,523, 30,15);
+  ellipse(263,523, 24,12);
+  ellipse(263,523, 13,10);
+  ellipse(263,523, 47,19);
+  if(lArrow == true && ArrowDelay<=10) fill(#FAA158,25);
+  else fill(#FAA158,0);
+  ellipse(263,523, 120,50);
+  ellipse(263,523, 240,150);
+  translate(width/4, height/4);
+  rotate(-0.08);
+  translate(-width/4, -height/4);
+
+  if(ArrowDelay == 20) ArrowDelay = 0;
+  ArrowDelay++;
+}
+
+
+void keyPressed(){
+  if((key == 'f' || key == 'F') && headlight==false) {
+    System.out.println("acendeu o farol");
+    headlight = true;
+  }
+  else if((key == 'f' || key == 'F') && headlight==true) {
+    System.out.println("desligou o farol");
+    headlight = false;
+  }
+  
+  if((key == 'p' || key == 'P') && wiping == true) {
+    wiping = false;
+    System.out.println("desligou o limpador");
+  }
+  else if((key == 'p' || key == 'P') && wiping == false) {
+    wiping = true;
+   System.out.println("ligou o limpador");
+  }
+  
+  if( keyCode == LEFT && lArrow == false){
+    lArrow = true;
+    rArrow = false;
+    ArrowDelay = 0;
+    System.out.println("deu seta pra esquerda");
+  }
+  else if(keyCode == LEFT && lArrow == true){
+    lArrow = false;
+    ArrowDelay = 0;
+    System.out.println("cancelou a seta pra esquerda");
+  }
+  
+  
+  if( keyCode == RIGHT && rArrow == false){
+    lArrow = false;
+    rArrow = true;
+    ArrowDelay = 0;
+    System.out.println("deu seta pra direita");
+  }
+  else if( keyCode == RIGHT && rArrow == true){
+    rArrow = false;
+    ArrowDelay = 0;
+    System.out.println("cancelou a seta pra direita");
+  }
 }
